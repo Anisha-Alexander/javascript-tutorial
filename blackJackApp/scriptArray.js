@@ -1,5 +1,6 @@
-let firstCard=9
-let secondCard=1
+let firstCard=getRandomCard()
+let secondCard=getRandomCard()
+let cards=[firstCard,secondCard]// ordered list of items -array
 let sum= firstCard+secondCard
 let hasBlackJack =false //to track the the win
 let isAlive= true //to check if you still have chance to stay
@@ -9,14 +10,15 @@ let messageEl= document.getElementById("message-el")//to display message in wind
 let sumEl= document.getElementById("sum-el")//to display the sum in window
 let cardsEl=document.getElementById("cards-el")//to display the cards in window
 
-
 function startGame(){
     renderGame()
 }
 
+
 function renderGame(){
-    
-    sumEl.textContent = sum   
+       
+     
+     sumEl.textContent = sum
     
     if (sum < 21){
         message="Do you want to draw a new card"
@@ -27,20 +29,25 @@ function renderGame(){
         hasBlackJack=true
     }
     else if(sum > 21){
-        message="You're out of the game" 
-        hasBlackJack=false       
+        message="You're out of the game"            
         isAlive=false
     }
-    cardsEl.textContent= firstCard + " , " + secondCard     
-    sum=firstCard + secondCard  
-    messageEl.textContent=message
-    console.log("hasblackjack"+" : "+hasBlackJack)
+    for(let i=0;i< cards.length; i+=1){
+        cardsEl.textContent += cards[i] + " , "        
+     }
+     cards=[]
+    messageEl.textContent=message    
 }
-function newCard(){
-    console.log("Drawing a new card from the deck ....") 
-    let drawnCard = 11  
-    
-    sum =firstCard + secondCard + drawnCard    
+function newCard(){    
+    let drawnCard = getRandomCard()  
+    sum += drawnCard   
+    cards.push(drawnCard) 
+    console.log(cards)    
     renderGame()    
-    cardsEl.textContent= firstCard + " , " + secondCard + " , " + drawnCard        
 }
+
+// ---------------------------------
+// let cards= [7,4]
+// console.log(cards)
+// cards.push(8,7)
+// console.log(cards)
